@@ -1,0 +1,84 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 800,
+    "height": 600,
+    "projection": {
+      "type": "equirectangular",
+      "center": [15, 50],
+      "scale": 500
+    },
+    "layer": [
+  
+      {
+        "data": {"graticule": {"step": [10, 10]}},
+        "mark": {"type": "geoshape", "stroke": "#d9d9d9", "strokeWidth": 0.5, "opacity": 0.8}
+      },
+  
+      {
+        "data": {
+          "url": "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json",
+          "format": {"type": "topojson", "feature": "countries"}
+        },
+        "mark": {"type": "geoshape", "fill": "#f6fbff", "stroke": null}
+      },
+  
+      {
+        "data": {
+          "url": "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json",
+          "format": {"type": "topojson", "feature": "countries"}
+        },
+        "transform": [
+          {
+            "lookup": "id",
+            "from": {
+              "data": {"url": "wins.csv"},
+              "key": "id",
+              "fields": ["wins", "country"]
+            }
+          }
+        ],
+        "mark": {"type": "geoshape"},
+        "encoding": {
+          "color": {
+            "field": "wins",
+            "type": "quantitative",
+            "scale": {
+            "scheme": "blues",      
+            "domain": [0, 10]     
+          },
+            "legend": {"title": "Australian GP wins"}
+          },
+          "tooltip": [
+            {"field": "country", "type": "nominal", "title": "Country:"},
+            {"field": "wins", "type": "quantitative", "title": "Australian GP Wins:"}
+          ]
+        }
+      },
+
+      {
+        "data": {
+          "values": [
+            {"country": "Monaco", "wins": 1, "lon": 7.42, "lat": 43.73}
+          ]
+        },
+        "mark": {"type": "circle", "size": 80, "color": "blue"},
+        "encoding": {
+          "longitude": {"field": "lon", "type": "quantitative"},
+          "latitude": {"field": "lat", "type": "quantitative"},
+          "tooltip": [
+            {"field": "country", "type": "nominal", "title": "Country:"},
+            {"field": "wins", "type": "quantitative", "title": "Australian GP Wins:"}
+          ]
+        }
+      },
+  
+      {
+        "data": {
+          "url": "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json",
+          "format": {"type": "topojson", "feature": "countries"}
+        },
+        "mark": {"type": "geoshape", "fill": null, "stroke": "#9aa4b2", "strokeWidth": 0.3}
+      }
+    ],
+    "title": {"text": "Australian Grand Prix — Wins by Driver Nationality (2000–2024)", "anchor": "start"}
+  }
