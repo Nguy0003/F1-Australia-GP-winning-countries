@@ -80,5 +80,6 @@
         "mark": {"type": "geoshape", "fill": null, "stroke": "#9aa4b2", "strokeWidth": 0.3}
       }
     ],
-    "title": {"text": "Australian Grand Prix — Wins by Driver Nationality (2000–2024)", "anchor": "start"}
+    "title": {"text": "Australian Grand Prix — Wins by Driver Nationality (2000–2025)", "anchor": "start"}
+
   }
